@@ -1,0 +1,53 @@
+{% comment %}
+  Renders a "Cotizar por WhatsApp" button for a product.
+  The message template comes from settings.quote_product_message and supports
+  the placeholders [producto], [variante], [sku] and [url].
+
+  Accepts:
+  - product: {Object} Product Liquid object
+  - variant: {Object} Variant to quote (optional, defaults to the selected or first available variant)
+  - id: {String} Element id, used to refresh the link when the variant changes (optional)
+  - class: {String} Extra CSS classes (optional)
+
+  Usage:
+  {% render 'whatsapp-quote-button', product: product, id: 'QuoteButton-main' %}
+{% endcomment %}
+{%- liquid
+  assign quote_variant = variant | default: product.selected_or_first_available_variant
+
+  assign variant_title = ''
+  if product.has_only_default_variant == false and quote_variant != blank
+    assign variant_title = quote_variant.title
+  endif
+
+  assign product_url = request.origin | append: product.url
+  if quote_variant != blank and product.has_only_default_variant == false
+    assign product_url = request.origin | append: quote_variant.url
+  endif
+
+  assign quote_message = settings.quote_product_message
+  if quote_message == blank
+    assign quote_message = 'Hola, me interesa cotizar: [producto] [variante]'
+  endif
+  assign quote_message = quote_message
+    | replace: '[producto]', product.title
+    | replace: '[variante]', variant_title
+    | replace: '[sku]', quote_variant.sku
+    | replace: '[url]', product_url
+    | replace: '  ', ' '
+-%}
+{%- capture quote_url -%}{% render 'whatsapp-link', message: quote_message %}{%- endcapture -%}
+<a
+  {% if id != blank %}
+    id="{{ id }}"
+  {% endif %}
+  href="{{ quote_url | strip }}"
+  class="button button--full-width whatsapp-quote-button{% if class != blank %} {{ class }}{% endif %}"
+  target="_blank"
+  rel="noopener"
+>
+  <span class="svg-wrapper whatsapp-quote-button__icon" aria-hidden="true">
+    {%- render 'icon-whatsapp' -%}
+  </span>
+  <span>{{ settings.quote_button_label | default: 'Cotizar por WhatsApp' | escape }}</span>
+</a>

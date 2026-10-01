@@ -1,0 +1,24 @@
+{% comment %}
+  Outputs a WhatsApp click-to-chat URL (no markup).
+  Falls back to the contact page when no WhatsApp number is configured.
+
+  Accepts:
+  - message: {String} Text pre-filled in the chat (optional, defaults to settings.whatsapp_default_message)
+
+  Usage:
+  {%- capture whatsapp_url -%}{% render 'whatsapp-link', message: 'Hola' %}{%- endcapture -%}
+{% endcomment %}
+{%- liquid
+  assign wa_number = settings.whatsapp_number | remove: ' ' | remove: '+' | remove: '-' | remove: '(' | remove: ')' | remove: '.'
+  assign wa_message = message | default: settings.whatsapp_default_message
+
+  if wa_number != blank
+    echo 'https://wa.me/' | append: wa_number
+    if wa_message != blank
+      echo '?text='
+      echo wa_message | strip | url_encode | replace: '+', '%20'
+    endif
+  else
+    echo routes.root_url | append: '/pages/contact' | replace: '//', '/'
+  endif
+-%}

@@ -1,0 +1,19 @@
+{% comment %}
+  Floating WhatsApp button shown on every page.
+  Controlled from Theme settings > WhatsApp y cotización.
+{% endcomment %}
+{%- if settings.whatsapp_float_enable -%}
+  {%- capture float_url -%}{% render 'whatsapp-link' %}{%- endcapture -%}
+  <a
+    href="{{ float_url | strip }}"
+    class="whatsapp-float whatsapp-float--{{ settings.whatsapp_float_position | default: 'right' }}{% if settings.whatsapp_float_label == blank %} whatsapp-float--icon-only{% endif %}"
+    target="_blank"
+    rel="noopener"
+    aria-label="{{ settings.whatsapp_float_label | default: 'WhatsApp' | escape }}"
+  >
+    <span class="whatsapp-float__icon" aria-hidden="true">{%- render 'icon-whatsapp' -%}</span>
+    {%- if settings.whatsapp_float_label != blank -%}
+      <span class="whatsapp-float__label">{{ settings.whatsapp_float_label | escape }}</span>
+    {%- endif -%}
+  </a>
+{%- endif -%}
