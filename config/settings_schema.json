@@ -1453,6 +1453,96 @@
     ]
   },
   {
+    "name": "WhatsApp y cotización",
+    "settings": [
+      {
+        "type": "header",
+        "content": "WhatsApp"
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_number",
+        "label": "Número de WhatsApp",
+        "info": "Con código de país, sin espacios ni signos. Ejemplo para México: 5216671234567"
+      },
+      {
+        "type": "textarea",
+        "id": "whatsapp_default_message",
+        "label": "Mensaje predeterminado",
+        "default": "Hola, me gustaría solicitar una cotización."
+      },
+      {
+        "type": "header",
+        "content": "Botón flotante"
+      },
+      {
+        "type": "checkbox",
+        "id": "whatsapp_float_enable",
+        "label": "Mostrar botón flotante de WhatsApp",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_float_label",
+        "label": "Texto del botón",
+        "default": "Cotiza por WhatsApp",
+        "info": "Déjalo vacío para mostrar solo el ícono."
+      },
+      {
+        "type": "select",
+        "id": "whatsapp_float_position",
+        "label": "Posición",
+        "options": [
+          {
+            "value": "right",
+            "label": "Abajo a la derecha"
+          },
+          {
+            "value": "left",
+            "label": "Abajo a la izquierda"
+          }
+        ],
+        "default": "right"
+      },
+      {
+        "type": "header",
+        "content": "Modo cotización"
+      },
+      {
+        "type": "checkbox",
+        "id": "quote_mode",
+        "label": "Activar modo cotización",
+        "default": true,
+        "info": "Reemplaza \"Agregar al carrito\" por un botón de cotización por WhatsApp y oculta el carrito."
+      },
+      {
+        "type": "checkbox",
+        "id": "quote_hide_prices",
+        "label": "Ocultar precios",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "quote_show_on_cards",
+        "label": "Mostrar botón de cotizar en las tarjetas de producto",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "quote_button_label",
+        "label": "Texto del botón de cotizar",
+        "default": "Cotizar por WhatsApp"
+      },
+      {
+        "type": "textarea",
+        "id": "quote_product_message",
+        "label": "Mensaje de cotización por producto",
+        "default": "Hola, me interesa cotizar: [producto] [variante] [url]",
+        "info": "Puedes usar [producto], [variante], [sku] y [url]."
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.customer_accounts.name",
     "settings": [
       {

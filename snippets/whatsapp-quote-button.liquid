@@ -29,12 +29,11 @@
   if quote_message == blank
     assign quote_message = 'Hola, me interesa cotizar: [producto] [variante]'
   endif
-  assign quote_message = quote_message
-    | replace: '[producto]', product.title
-    | replace: '[variante]', variant_title
-    | replace: '[sku]', quote_variant.sku
-    | replace: '[url]', product_url
-    | replace: '  ', ' '
+  if product == blank
+    assign quote_message = settings.whatsapp_default_message
+  endif
+  assign quote_message = quote_message | replace: '[producto]', product.title | replace: '[variante]', variant_title
+  assign quote_message = quote_message | replace: '[sku]', quote_variant.sku | replace: '[url]', product_url | replace: '  ', ' '
 -%}
 {%- capture quote_url -%}{% render 'whatsapp-link', message: quote_message %}{%- endcapture -%}
 <a

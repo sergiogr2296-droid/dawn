@@ -28,6 +28,9 @@
   {{ 'quick-order-list.css' | asset_url | stylesheet_tag }}
   {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
 {%- endunless -%}
+{%- if settings.quote_mode -%}
+  {%- assign quick_add = 'none' -%}
+{%- endif -%}
 {%- if card_product and card_product != empty -%}
   {%- liquid
     assign ratio = 1
@@ -206,7 +209,9 @@
                 </p>
               {%- endif -%}
 
-              {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
+              {%- unless settings.quote_hide_prices -%}
+                {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
+              {%- endunless -%}
               {%- if card_product.quantity_price_breaks_configured? -%}
                 {% if card_product.variants_count == 1 and quick_add == 'bulk' %}
                   {% liquid
@@ -290,6 +295,11 @@
               {%- endif -%}
             </div>
           </div>
+          {%- if settings.quote_mode and settings.quote_show_on_cards -%}
+            <div class="card-quote">
+              {%- render 'whatsapp-quote-button', product: card_product, class: 'button--secondary' -%}
+            </div>
+          {%- endif -%}
           {% assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id %}
           {% if quick_add == 'standard' %}
             <div class="quick-add no-js-hidden">

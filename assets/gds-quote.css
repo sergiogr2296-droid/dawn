@@ -1,0 +1,134 @@
+/* Growers Depot Supply: WhatsApp quote flow */
+
+:root {
+  --gds-whatsapp: 37, 211, 102;
+  --gds-whatsapp-dark: 18, 140, 126;
+}
+
+/* Quote button (product page and cards) */
+.whatsapp-quote-button {
+  gap: 0.8rem;
+}
+
+.whatsapp-quote-button__icon {
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+}
+
+.whatsapp-quote-button__icon .icon {
+  width: 100%;
+  height: 100%;
+}
+
+.product-form--quote {
+  margin-bottom: 1.5rem;
+}
+
+.card-quote {
+  position: relative;
+  z-index: 1;
+  grid-row-start: 4;
+  margin: 0 0 1rem;
+}
+
+.card--card .card-quote {
+  margin: 0 1.3rem 1rem;
+}
+
+.card-quote .whatsapp-quote-button {
+  min-height: 4rem;
+  font-size: 1.3rem;
+  padding: 0 1.2rem;
+}
+
+/* Hide the cart when the store works by quotation */
+.quote-mode #cart-icon-bubble {
+  display: none;
+}
+
+/* Floating WhatsApp button */
+.whatsapp-float {
+  position: fixed;
+  bottom: 2rem;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 5.6rem;
+  padding: 0 2rem 0 1.6rem;
+  border-radius: 999px;
+  background-color: rgb(var(--gds-whatsapp));
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.5rem;
+  text-decoration: none;
+  box-shadow: 0 0.6rem 1.8rem rgba(0, 0, 0, 0.2);
+  transition: transform var(--duration-short) ease, background-color var(--duration-short) ease;
+}
+
+.whatsapp-float:hover {
+  background-color: rgb(var(--gds-whatsapp-dark));
+  transform: translateY(-0.2rem);
+}
+
+.whatsapp-float:focus-visible {
+  outline: 0.2rem solid rgb(var(--color-foreground));
+  outline-offset: 0.3rem;
+}
+
+.whatsapp-float--right {
+  right: 2rem;
+}
+
+.whatsapp-float--left {
+  left: 2rem;
+}
+
+.whatsapp-float__icon {
+  display: inline-flex;
+  width: 2.8rem;
+  height: 2.8rem;
+}
+
+.whatsapp-float__icon .icon {
+  width: 100%;
+  height: 100%;
+}
+
+.whatsapp-float--icon-only {
+  width: 5.6rem;
+  padding: 0;
+  justify-content: center;
+}
+
+@media screen and (max-width: 749px) {
+  .whatsapp-float {
+    bottom: 1.6rem;
+    width: 5.6rem;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .whatsapp-float--right {
+    right: 1.6rem;
+  }
+
+  .whatsapp-float--left {
+    left: 1.6rem;
+  }
+
+  .whatsapp-float__label {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-float {
+    transition: none;
+  }
+
+  .whatsapp-float:hover {
+    transform: none;
+  }
+}

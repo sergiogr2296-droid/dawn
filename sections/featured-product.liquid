@@ -117,7 +117,14 @@
                     {%- endunless -%}
                   </h2>
                 {%- when 'price' -%}
-                  <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                  <div
+                    id="price-{{ section.id }}"
+                    role="status"
+                    {% if settings.quote_hide_prices %}
+                      hidden
+                    {% endif %}
+                    {{ block.shopify_attributes }}
+                  >
                     {%- render 'price',
                       product: product,
                       placeholder: placeholder,
